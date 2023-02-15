@@ -5,21 +5,16 @@
   !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=e};analytics._writeKey="AlHEbRxlNGPCFoFCH0NqMMSk9y8wHCgj";;analytics.SNIPPET_VERSION="4.15.3";
   analytics.load("AlHEbRxlNGPCFoFCH0NqMMSk9y8wHCgj");
   }}();
-  analytics.page();
-​
 // base values for demo data.  26 users with email, first name, and last name 
 const user_emails = [ "austere_alligator@segmenttraining.com", "bashful_bison@segmenttraining.com", "creative_crab@segmenttraining.com", "diligent_dingo@segmenttraining.com", "efficient_eel@segmenttraining.com", "famous_frog@segmenttraining.com", "gentle_gibbon@segmenttraining.com", "helpful_hummingbird@segmenttraining.com", "important_iguana@segmenttraining.com","joyful_jerboa@segmenttraining.com", "kindly_krill@segmenttraining.com", "laudable_lemur@segmenttraining.com", "magnetic_marmot@segmenttraining.com", "naive_narwhal@segmenttraining.com", "optimistic_otter@segmenttraining.com", "patient_pangolin@segmenttraining.com", "quirky_quagga@segmenttraining.com", "radiant_raccoon@segmenttraining.com", "shy_scorpion@segmenttraining.com", "tactful_tarsier@segmenttraining.com", "underrated_utonagan@segmenttraining.com", "valiant_vaquita@segmenttraining.com", "wistful_walrus@segmenttraining.com", "xerographic_xerus@segmenttraining.com", "yawning_yak@segmenttraining.com", "zestful_zonkey@segmenttraining.com"];
 const user_first_names = [ "Austere", "Bashful", "Creative", "Diligent", "Efficient", "Famous", "Gentle", "Helpful", "Important", "Joyful", "Kindly",  "Laudable", "Magnetic", "Naive", "Optimistic", "Patient", "Quirky", "Radiant", "Shy", "Tactful", "Underrated", "Valiant", "Wistful", "Xerographic", "Yawning", "Zestful"];
 const user_last_names = [ "Alligator", "Bison", "Crab", "Dingo", "Eel", "Frog", "Gibbon", "Hummingbird", "Iguana", "Jerboa", "Krill", "Lemur", "Marmot", "Narwhal","Otter", "Pangolin", "Quagga", "Raccoon", "Scorpion", "Tarsier", "Utonagan", "Vaquita", "Walrus", "Xerus", "Yak", "Zonkey"];
 const blog_titles = ["Red is Back","Fall Ideas","Back to School","Pumpkin Spice Now","Naughty or Nice","Every Single Day","Common Sense Choices for Tweens","Mask Fashions For Summer","A Midnight Snack", "Ulterior Motives", "Chore Charts are Dead", "2021 Compliance Review", "Why You Need More Photos", "Best Picks for Winter", "Sparkle Up Your Workspace", "Mostly Harmless", "But Is It Safe", "Welcome Our Newest Partner", "The Pickle Controversy", "Lights Out War Stories", "Brazilian Lime", "An Ex Pack Rat Explains", "We Barely Knew Her", "Coupon Hunting Secrets", "Long Term Cyan", "Real or Fake", "Simple Projects for Rainy Days", "You Will Never Believe What Happened Next"];
 const coupon_codes = ["BOGO","Ten Percent Off","Twenty Percent Off","Half Off","XMAS20"];
-​
 // Event types for demo data.
 const event_types = ["Logged Out", "Logged In", "View Deals", "Cart Added", "Purchased", "Read Blog", "Redeemed Coupon","Newsletter Signed Up"];
-​
 // initialize last event a user took with a random value
 last_event = Array.from({length:26}, () => Math.floor(Math.random() * 8));
-​
 // the variable last_event and the function nextEvent() make up the state machine to determine what order to send events into Segment to maintain
 // a contextual illusion of users doing reasonably logical stuff.
 function nextEvent(currEvent){
@@ -59,7 +54,6 @@ function nextEvent(currEvent){
             return 0;
     }
 }
-​
 //pick a random user and track a semi-random event
 function sendData() {
     let userID = Math.floor(Math.random() * 26);
@@ -71,16 +65,13 @@ function sendData() {
     } else if(my_next_event == 6){
         analytics.track( event_types[my_next_event], { "coupon_code": coupon_codes[Math.floor(Math.random()*coupon_codes.length)]});
     } else if(my_next_event == 7){
-​
         analytics.track( event_types[my_next_event],{"email":user_emails[userID]});
         analytics.identify([userID,{"email":user_emails[userID]}]);
-​
     } else {
         analytics.track( event_types[my_next_event] );
     }
     last_event[userID] = my_next_event;
 }
-​
 //do that 100x
 function send100() {
     var times = 10;
@@ -88,7 +79,6 @@ function send100() {
         sendData();
     }
 }
-​
 </script>
 </head>
 <body>
@@ -97,7 +87,5 @@ function send100() {
 <form name="myForm" action="/action_page.php" onClick="send100()" method="post">
 <input type="button" value="Button">
 </form>
-​
-​
 </body>
 </html>
